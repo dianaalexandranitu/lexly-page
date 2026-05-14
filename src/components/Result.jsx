@@ -144,7 +144,7 @@ export default function Result({ docs, answers, onRestart }) {
 }
 
 function generateHTML(docs, answers) {
-  const date = new Date().toLocaleDateString('en-NL')
+  const date = new Date().toLocaleDateString('en-GB')
   const company = answers.company_name || 'Company'
   const docIcons = { terms: '📄', privacy: '🔒', cookies: '🍪', ai_obligations: '🤖' }
 
@@ -195,50 +195,54 @@ function generateHTML(docs, answers) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>${company} — Legal Documents · Clausly</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: #0D0D0D;
-  color: #F0EDE8;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #FAFAF7;
+  color: #111111;
   line-height: 1.6;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 .cover {
   padding: 48px;
-  border-bottom: 1px solid #1F1F1F;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: white;
 }
 
 .cover-brand {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-size: 18px;
-  color: #888;
+  color: #1A6B3C;
   letter-spacing: -0.3px;
+  font-weight: 600;
 }
 
 .cover-company {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-size: 42px;
-  color: #F0EDE8;
+  color: #111111;
   letter-spacing: -1px;
   margin-bottom: 6px;
+  font-weight: 300;
 }
 
 .cover-meta {
   font-size: 13px;
-  color: #555;
+  color: #999999;
 }
 
 .cover-right {
   text-align: right;
   font-size: 12px;
-  color: #444;
+  color: #999999;
 }
 
 .container {
@@ -259,14 +263,14 @@ body {
 .doc-icon { font-size: 28px; }
 
 .doc-header h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'Fraunces', Georgia, serif;
   font-size: 28px;
   font-weight: 400;
-  color: #F0EDE8;
+  color: #111111;
   letter-spacing: -0.5px;
 }
 
-.doc-sub { font-size: 13px; color: #555; margin-top: 2px; }
+.doc-sub { font-size: 13px; color: #999999; margin-top: 2px; }
 
 .law-chips {
   display: flex;
@@ -278,41 +282,37 @@ body {
 .law-chip {
   font-size: 10px;
   padding: 3px 10px;
-  border: 1px solid #2A2A2A;
+  border: 1px solid rgba(0,0,0,0.14);
   border-radius: 20px;
-  color: #666;
+  color: #999999;
   letter-spacing: 0.02em;
 }
 
-.clauses { display: flex; flex-direction: column; gap: 2px; }
+.clauses { display: flex; flex-direction: column; gap: 6px; }
 
 .clause {
   display: grid;
   grid-template-columns: 48px 1fr;
-  gap: 0;
-  border: 1px solid #1A1A1A;
+  border: 1px solid rgba(0,0,0,0.08);
   border-radius: 8px;
   overflow: hidden;
-  background: #111;
-  transition: border-color 0.15s;
+  background: white;
 }
 
-.clause:hover { border-color: #2A2A2A; }
-.clause-risk { border-color: #3A1A0A; }
-.clause-risk:hover { border-color: #6B2E0A; }
-.clause-ai { border-color: #1A1A3A; }
+.clause-risk { border-color: #FCDCC8; }
+.clause-ai { border-color: #DDDCF8; }
 
 .clause-num {
-  background: #161616;
+  background: #FAFAF7;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding-top: 20px;
   font-size: 11px;
-  font-weight: 500;
-  color: #444;
+  font-weight: 600;
+  color: #999999;
   letter-spacing: 0.05em;
-  border-right: 1px solid #1A1A1A;
+  border-right: 1px solid rgba(0,0,0,0.08);
 }
 
 .clause-body { padding: 18px 20px; }
@@ -327,89 +327,87 @@ body {
 
 .clause-name {
   font-size: 14px;
-  font-weight: 500;
-  color: #E8E4DE;
+  font-weight: 600;
+  color: #111111;
 }
 
 .badges { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; }
 
 .badge-valid {
   font-size: 10px;
+  font-weight: 500;
   padding: 2px 8px;
-  background: #0A1F0A;
-  border: 1px solid #1A3A1A;
-  color: #4A8A42;
+  background: #EAF3EE;
+  border: 1px solid rgba(26,107,60,0.2);
+  color: #1A6B3C;
   border-radius: 20px;
   white-space: nowrap;
 }
 
 .badge-risk {
   font-size: 10px;
+  font-weight: 500;
   padding: 2px 8px;
-  background: #2A0A00;
-  border: 1px solid #4A1A00;
-  color: #C4520A;
+  background: #FEF3E8;
+  border: 1px solid rgba(184,92,0,0.2);
+  color: #B85C00;
   border-radius: 20px;
   white-space: nowrap;
 }
 
 .badge-ai {
   font-size: 10px;
+  font-weight: 500;
   padding: 2px 8px;
-  background: #0A0A2A;
-  border: 1px solid #1A1A4A;
-  color: #7070CC;
+  background: #EEEEFF;
+  border: 1px solid rgba(74,58,232,0.2);
+  color: #4A3AE8;
   border-radius: 20px;
   white-space: nowrap;
 }
 
 .clause-why {
   font-size: 14px;
-  color: #AAA;
+  color: #555555;
   line-height: 1.65;
   margin-bottom: 12px;
 }
 
 .toggle {
   font-size: 11px;
-  color: #4A8A42;
+  color: #1A6B3C;
   cursor: pointer;
   user-select: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
-
-.toggle:hover { color: #6AAA62; }
 
 .legal-text {
   display: none;
   margin-top: 14px;
   padding: 14px 16px;
-  background: #0A0A0A;
+  background: #FAFAF7;
   border-radius: 6px;
   font-size: 12.5px;
-  color: #666;
+  color: #555555;
   line-height: 1.75;
-  border-left: 2px solid #2A2A2A;
+  border-left: 2px solid rgba(0,0,0,0.14);
 }
 
 .legal-text.open { display: block; }
 
 .sep {
   border: none;
-  border-top: 1px solid #1A1A1A;
+  border-top: 1px solid rgba(0,0,0,0.08);
   margin: 64px 0;
 }
 
 .footer {
   text-align: center;
   font-size: 11px;
-  color: #333;
+  color: #999999;
   padding: 32px 48px;
-  border-top: 1px solid #1A1A1A;
+  border-top: 1px solid rgba(0,0,0,0.08);
 }
 
 @media (max-width: 600px) {
@@ -427,7 +425,7 @@ body {
     <div class="cover-company">${company}</div>
     <div class="cover-meta">Legal Documents Package · ${date}</div>
   </div>
-  <div class="cover-right">Generated for Dutch law<br>clausly.com</div>
+  <div class="cover-right">Generated for Dutch law</div>
 </div>
 <div class="container">
   ${docsHTML}
