@@ -51,10 +51,12 @@ function profile(a) {
 function buildPrompt1(a) {
   return `You are a Dutch legal expert. Generate TWO legal documents for this Dutch startup. Return ONLY valid JSON, no other text, no markdown.
 
+IMPORTANT: Write ALL content — including legal_text, why, titles, subtitles, alerts, and summaries — in English only. Do not use any Dutch words or phrases anywhere in the output.
+
 BUSINESS PROFILE:
 ${profile(a)}
 
-Return exactly this structure. Use 5-7 sections per document. legal_text must be real usable legal text. why must be 1-2 plain English sentences. No line breaks inside string values. No unescaped apostrophes.
+Return exactly this structure. Use 5-7 sections per document. legal_text must be real usable legal text written in English. why must be 1-2 plain English sentences. No line breaks inside string values. No unescaped apostrophes.
 
 {"documents":[{"id":"terms","title":"General Terms and Conditions","subtitle":"Based on Dutch Civil Code","applicable_law":["Dutch Civil Code Art. 6:231","EU Consumer Rights Directive"],"sections":[{"id":"s1","title":"Applicability","legal_text":"...","why":"...","flag":null}]},{"id":"privacy","title":"Privacy Policy","subtitle":"Based on GDPR and Dutch implementation","applicable_law":["GDPR","Uitvoeringswet AVG"],"sections":[{"id":"p1","title":"Who we are","legal_text":"...","why":"...","flag":null}]}],"alerts":[{"severity":"warning","title":"...","message":"..."}],"summary":"2 sentence summary."}`
 }
@@ -63,10 +65,12 @@ function buildPrompt2(a) {
   const includeAI = a.uses_ai === 'Yes'
   return `You are a Dutch legal expert. Generate TWO legal documents for this Dutch startup. Return ONLY valid JSON, no other text, no markdown.
 
+IMPORTANT: Write ALL content — including legal_text, why, titles, subtitles, alerts, and summaries — in English only. Do not use any Dutch words or phrases anywhere in the output.
+
 BUSINESS PROFILE:
 ${profile(a)}
 
-Return exactly this structure. Use 4-6 sections per document. legal_text must be real usable legal text. why must be 1-2 plain English sentences. No line breaks inside string values. No unescaped apostrophes.
+Return exactly this structure. Use 4-6 sections per document. legal_text must be real usable legal text written in English. why must be 1-2 plain English sentences. No line breaks inside string values. No unescaped apostrophes.
 
 {"documents":[{"id":"cookies","title":"Cookie Policy","subtitle":"Based on ePrivacy Directive and GDPR","applicable_law":["ePrivacy Directive","GDPR"],"sections":[{"id":"c1","title":"What are cookies","legal_text":"...","why":"...","flag":null}]},{"id":"ai_obligations","title":"AI Compliance Note","subtitle":"Based on EU AI Act 2024","applicable_law":["EU AI Act 2024/1689"],"sections":[{"id":"a1","title":"Risk classification","legal_text":"...","why":"...","flag":${includeAI ? '"ai-act"' : 'null'}}]}],"alerts":[],"summary":""}
 
