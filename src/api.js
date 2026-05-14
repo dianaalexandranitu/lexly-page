@@ -15,7 +15,7 @@ export async function generateDocuments(answers) {
 }
 
 async function callAPI(prompt) {
-  const response = await fetch('/.netlify/functions/generate', {
+  const response = await fetch('/api/generate', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
